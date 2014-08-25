@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="http://l2.io/ip.js?var=userip"></script>
+<script type="text/javascript">
+//Always remember to declare your variables
+var downloading = false;
+var dl_lines = new Array("","","","","","","",""); //init dlbox array
+
+//initialload
+function BeginWork(){
+document.getElementById("dataset").innerHTML = document.getElementById("dataset").innerHTML + "Connecting from IP: " + userip + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DONE]<br>Loading assets and detecting map, please wait...";
+}
+
+// Called when the loading screen finishes loading all assets.
+function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode ) {
+
+	//dolls (regular)
+	if (mapname == "de_dolls" || mapname == "de_dolls.bsp"){
+		document.getElementById("loadingimg").src="dolls_loading.png";
+	//dolls (blue)
+	} else if (mapname== "de_dolls_blue"|| mapname== "de_dolls_blue.bsp" ) {
+		document.getElementById("loadingimg").src="bluedolls_loading.png";
+	//minecraft b5	
+	} else if (mapname == "ttt_minecraft_b5" || mapname == "ttt_minecraft_b5.bsp" ) {
+		document.getElementById("loadingimg").src="minecraft_loading.png";		
+	//minecraft city
+	} else if (mapname == "ttt_minecraftcity_v4" || mapname == "ttt_minecraftcity_v4.bsp" ) {
+	document.getElementById("loadingimg").src="minecraftcity_loading.png";
+	//minecraft city fixed
+	} else if (mapname == "ttt_minecraftcity_v4fixed" || mapname == "ttt_minecraftcity_v4fixed.bsp" ) {
+	document.getElementById("loadingimg").src="minecraftcity_loading.png";
+	
+	//map wasn't on list here, might as well use a generic loading image
+	
+	} else {
+	document.getElementById("loadingimg").src="generic_loading.jpg";
+	}
+
+document.getElementById("bgdiv").width = window.innerWidth;
+document.getElementById("bgdiv").height = window.innerHeight;
+}
+
+// Called when a file starts downloading. The filename includes the entire path of the file;
+// for example "materials/models/bobsModels/car.mdl".
+function DownloadingFile( fileName ) {
+if (dl_lines[1]!=""){
+downloading=true;
+document.getElementById("dlbox").className = "dlbox_active";
+}
+dl_lines.unshift(fileName + '<br>'); //add current file to the first position of the dl lines array
+dl_lines.pop();             //remove the last item in the array to maintain length
+dl_lines[1] = dl_lines[1] = dl_lines[1].substring(0, dl_lines[1].length - 4) //remove the break so we can add a done statement
+dl_lines[1] = dl_lines[1] + ' [<font color="#00FF00">DONE!</font>]<br>'; //mark last file as done
+
+
+//dump the array into the dlbox;
+document.getElementById("dlbox").innerHTML = '<div align="center">[DOWNLOADING]</div>'
+document.getElementById("dlbox").innerHTML = document.getElementById("dlbox").innerHTML + dl_lines[0] + dl_lines[1] + dl_lines[2] + dl_lines[3] + dl_lines[4] + dl_lines[5] + dl_lines[6] + dl_lines[7];
+
+}
+
+// Called when something happens. This might be "Initialising Game Data", "Sending Client Info", etc.
+function SetStatusChanged( status ) {
+}
+
+// Called at the start, tells us how many files need to be downloaded in total.
+function SetFilesTotal( total ) {
+}
+
+// Called when the number of files to download changes.
+function SetFilesNeeded( needed ) {
+}
+</script>
+
+</head>
+
+<body bgcolor="#000000" text="#99FF99" style="overflow:hidden;" onload="BeginWork();">
+
+<!-- Pre-Load Header -->
+<div id="dataset" style="font-family:Lucida Console;position:absolute;top:0px;left:0px;text-shadow: 0 0 0.2em #00FF00, 0 0 0.2em #00FF00">
+	<sub><font size="5"><b>Simple Loader</b></font></sub><font size="1" style="vertical-align:top;">v0.84</font><font size="1" style="vertical-align:bottom;">by BMX_ATVMAN14 for RuberGaming</font><br>
+	<div style="vertical-align:top;"><sup><b>________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</b></sup></div>
+</div>
+<div style="background-image:url('scanlines.png');position:absolute;top:0px;left:0px;width:100%;height:100%;"></div>
+
+<!-- Loading Screen Image -->
+<div style="position:absolute;top:0px;left:0px;width:100%;height:100%;padding:0px;">
+	<div id="bgdiv" style="position:relative;top:0px;left:0px;width:100%;height:100%;padding:0px;">
+		<img id="loadingimg" src="blank.gif" style="width:100%;height:100%;">
+	</div>
+</div>
+
+<!-- Download Box-->
+<font face="Verdana" style="color:#FFFFFF;text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px black;"><b>
+	<div align="center" align="center" style="position:absolute;top:0px;left:0px;height:100%;width:100%;">
+		<div id="dlbox" align="left" class="dlbox_inactive"></div>
+	</div>
+</b></font>
+
+<!-- Music was removed to decrease loadtime-->
+</body>
+</html>
