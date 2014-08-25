@@ -3,6 +3,17 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script type="text/javascript" src="http://l2.io/ip.js?var=userip"></script>
+
+
+<script type="text/javascript"><!-- Script to center content -->
+$(document).ready(function() {
+		
+//Changes volume of song. 0.5=50% 1=100% volume 
+$('.audio').prop("volume", 0.5);
+});
+</script>	
+
+
 <script type="text/javascript">
 //Always remember to declare your variables
 var downloading = false;
@@ -100,5 +111,16 @@ function SetFilesNeeded( needed ) {
 </b></font>
 
 <!-- Music was removed to decrease loadtime-->
+
+<!-- MUSIC SCRIPT -->
+    <!-- To activate simply delete the comment tags and replace music.mp3 with the path to your sound file. -->
+    <!-- Adding copyrighted music is illegal as you will be redistributing from the server this is hosted from, this means that you will be held liable -->
+    
+     
+    <audio class="audio" autoplay autobuffer="autobuffer">
+    	<source src="loading.mp3" type="audio/mp3">
+    </audio>
+
+
 </body>
 </html>
